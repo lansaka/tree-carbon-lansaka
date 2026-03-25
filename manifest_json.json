@@ -1,0 +1,26 @@
+{
+  "name": "Tree Carbon Inventory — รพ.ลานสกา",
+  "short_name": "Tree Carbon",
+  "description": "แอปบันทึกข้อมูลต้นไม้และคำนวณคาร์บอน โรงพยาบาลลานสกา",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1D9E75",
+  "orientation": "portrait",
+  "lang": "th",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["health", "productivity", "utilities"]
+}

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#1D9E75">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Tree Carbon">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Tree Carbon Inventory — รพ.ลานสกา</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  :root{
+    --green:#1D9E75;--green-light:#E1F5EE;--green-dark:#085041;
+    --blue:#185FA5;--blue-light:#E6F1FB;
+    --amber:#BA7517;--amber-light:#FAEEDA;
+    --red:#A32D2D;--red-light:#FCEBEB;
+    --bg:#fff;--bg2:#f5f5f3;--bg3:#ebebea;
+    --text:#1a1a18;--text2:#5f5e5a;--text3:#9c9a92;
+    --border:rgba(0,0,0,0.12);--border2:rgba(0,0,0,0.22);
+    --radius:12px;--radius-sm:8px;
+    --font:'Sarabun',system-ui,sans-serif;
+  }
+  @media(prefers-color-scheme:dark){
+    :root{
+      --bg:#1c1c1a;--bg2:#2a2a27;--bg3:#333330;
+      --text:#e8e6dc;--text2:#9c9a92;--text3:#66645e;
+      --border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.2);
+    }
+  }
+  body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15px;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+
+  /* Layout */
+  .app{max-width:480px;margin:0 auto;padding-bottom:68px;min-height:100vh}
+  .page{display:none;animation:fadeIn .15s ease}
+  .page.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  /* Header */
+  .header{background:var(--bg);border-bottom:0.5px solid var(--border);padding:12px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:50}
+  .header-title{font-size:17px;font-weight:600;flex:1}
+  .back-btn{background:none;border:none;color:var(--green);font-size:15px;cursor:pointer;padding:4px 8px;font-family:var(--font)}
+
+  /* Nav */
+  .nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:var(--bg);border-top:0.5px solid var(--border);display:flex;z-index:50;padding-bottom:env(safe-area-inset-bottom)}
+  .nav-btn{flex:1;background:none;border:none;padding:8px 4px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;font-family:var(--font);font-size:11px;color:var(--text2);transition:color .15s}
+  .nav-btn.active{color:var(--green)}
+  .nav-icon{font-size:20px}
+
+  /* Cards */
+  .card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin:8px 12px}
+  .card-section{margin-top:4px}
+
+  /* Metrics */
+  .metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:12px 12px 0}
+  .metric{background:var(--bg2);border-radius:var(--radius-sm);padding:10px 8px;text-align:center}
+  .metric-val{font-size:22px;font-weight:600;line-height:1.1;margin:2px 0}
+  .metric-label{font-size:11px;color:var(--text2)}
+  .metric-unit{font-size:10px;color:var(--text3)}
+
+  /* Form */
+  label.field-label{display:block;font-size:12px;color:var(--text2);margin-bottom:5px;font-weight:500}
+  input,select,textarea{width:100%;padding:10px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:15px;background:var(--bg);color:var(--text);font-family:var(--font);outline:none;transition:border-color .15s}
+  input:focus,select:focus{border-color:var(--green)}
+  input[readonly]{background:var(--bg2);color:var(--text2)}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+
+  /* Buttons */
+  .btn-primary{background:var(--green);color:#fff;border:none;border-radius:var(--radius-sm);padding:13px;width:100%;font-size:15px;font-weight:600;cursor:pointer;font-family:var(--font);transition:opacity .15s}
+  .btn-primary:active{opacity:.85}
+  .btn-primary:disabled{opacity:.5}
+  .btn-primary.blue{background:var(--blue)}
+  .btn-primary.red{background:var(--red)}
+  .btn-outline{background:none;border:0.5px solid var(--border2);border-radius:var(--radius-sm);padding:9px 14px;font-size:13px;cursor:pointer;color:var(--text);font-family:var(--font)}
+  .btn-gps{background:var(--green-light);color:var(--green-dark);border:0.5px solid var(--green);border-radius:var(--radius-sm);padding:10px 14px;font-size:13px;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:6px;white-space:nowrap}
+  .btn-smart{background:var(--blue-light);color:var(--blue);border:0.5px solid var(--blue);border-radius:var(--radius-sm);padding:10px 14px;font-size:13px;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:6px;white-space:nowrap}
+
+  /* Species chips */
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .chip{background:var(--bg2);border:0.5px solid var(--border);border-radius:20px;padding:5px 12px;font-size:13px;cursor:pointer;color:var(--text2);font-family:var(--font);transition:all .15s}
+  .chip.selected{background:var(--green);color:#fff;border-color:var(--green)}
+
+  /* Carbon result */
+  .carbon-result{background:var(--bg2);border-radius:var(--radius-sm);padding:12px}
+  .carbon-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;text-align:center}
+  .carbon-val{font-size:17px;font-weight:600;color:var(--green)}
+  .carbon-lbl{font-size:11px;color:var(--text2);margin-top:2px}
+
+  /* Tree list */
+  .tree-item{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin:8px 12px}
+  .tree-item-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+  .tree-item-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+  .stat-box{text-align:center}
+  .stat-val{font-size:14px;font-weight:600}
+  .stat-lbl{font-size:10px;color:var(--text3)}
+
+  /* Pills */
+  .pill{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600}
+  .pill-green{background:var(--green-light);color:var(--green-dark)}
+  .pill-blue{background:var(--blue-light);color:var(--blue)}
+  .pill-amber{background:var(--amber-light);color:var(--amber)}
+
+  /* Toast */
+  .toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:10px 20px;border-radius:20px;font-size:14px;z-index:999;opacity:0;transition:opacity .2s;pointer-events:none}
+  .toast.show{opacity:1}
+
+  /* GPS status */
+  .gps-status{font-size:12px;color:var(--green);margin-top:5px}
+
+  /* Summary */
+  .summary-species-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:0.5px solid var(--border)}
+  .summary-species-item:last-child{border-bottom:none}
+
+  /* Export */
+  .export-steps{list-style:none;counter-reset:steps}
+  .export-step{counter-increment:steps;display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:0.5px solid var(--border);font-size:13px;color:var(--text2);line-height:1.6}
+  .export-step:last-child{border-bottom:none}
+  .export-step::before{content:counter(steps);width:22px;height:22px;min-width:22px;background:var(--green);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600}
+
+  /* Loading */
+  .empty{text-align:center;padding:40px 20px;color:var(--text2)}
+  .empty-icon{font-size:44px;margin-bottom:12px}
+
+  /* Scroll padding for sticky header */
+  .scroll-area{padding-top:0}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ========== HOME PAGE ========== -->
+  <div class="page active" id="page-home">
+    <div class="header">
+      <span style="font-size:22px">🌳</span>
+      <span class="header-title">Tree Carbon Inventory</span>
+      <span style="font-size:12px;color:var(--text2)">รพ.ลานสกา</span>
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-label">ต้นไม้</div>
+        <div class="metric-val" id="stat-trees" style="color:var(--green)">0</div>
+        <div class="metric-unit">ต้น</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Carbon</div>
+        <div class="metric-val" id="stat-carbon" style="color:var(--blue)">0</div>
+        <div class="metric-unit">kgC</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">CO₂</div>
+        <div class="metric-val" id="stat-co2" style="color:var(--amber)">0</div>
+        <div class="metric-unit">kgCO₂</div>
+      </div>
+    </div>
+
+    <div style="padding:10px 12px 0">
+      <button class="btn-primary" onclick="goAdd()">+ บันทึกต้นไม้ใหม่</button>
+    </div>
+
+    <div id="tree-list"></div>
+  </div>
+
+  <!-- ========== ADD PAGE ========== -->
+  <div class="page" id="page-add">
+    <div class="header">
+      <button class="back-btn" onclick="goPage('home')">← กลับ</button>
+      <span class="header-title">บันทึกต้นไม้</span>
+    </div>
+
+    <div class="card">
+      <div class="row2">
+        <div>
+          <label class="field-label">รหัสต้นไม้ (Tree ID) *</label>
+          <input id="f-treeId" placeholder="T001" oninput="calcCarbon()">
+        </div>
+        <div>
+          <label class="field-label">วันที่สำรวจ *</label>
+          <input type="date" id="f-date">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <label class="field-label">ชนิดพันธุ์ไม้ *</label>
+      <div class="chips" id="species-chips"></div>
+      <input id="f-species" placeholder="หรือพิมพ์ชื่อพันธุ์ไม้..." oninput="syncSpecies(this.value)">
+    </div>
+
+    <div class="card">
+      <div class="row2">
+        <div>
+          <label class="field-label">เส้นรอบวงลำต้น (ซม.) *</label>
+          <input type="number" id="f-circ" placeholder="0" oninput="calcCarbon()" inputmode="decimal">
+        </div>
+        <div>
+          <label class="field-label">DBH (ซม.) — อัตโนมัติ</label>
+          <input id="f-dbh" readonly>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <label class="field-label">ความสูงต้นไม้ (เมตร)</label>
+      <div style="display:flex;gap:8px;align-items:flex-start">
+        <input type="number" id="f-height" placeholder="0.0" oninput="calcCarbon()" inputmode="decimal" style="flex:1">
+        <button class="btn-smart" onclick="openSmartMeasure()">📏 Smart<br>Measure</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <label class="field-label">พิกัด GPS</label>
+      <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap">
+        <button class="btn-gps" onclick="getGPS()">📍 ยิงพิกัดอัตโนมัติ</button>
+        <div id="gps-status" class="gps-status"></div>
+      </div>
+      <div class="row2">
+        <div>
+          <label class="field-label">Latitude</label>
+          <input type="number" id="f-lat" placeholder="7.xxxxx" step="0.000001" inputmode="decimal">
+        </div>
+        <div>
+          <label class="field-label">Longitude</label>
+          <input type="number" id="f-lng" placeholder="99.xxxxx" step="0.000001" inputmode="decimal">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row2">
+        <div>
+          <label class="field-label">ประเภทพื้นที่</label>
+          <select id="f-land">
+            <option value="">เลือก...</option>
+            <option>สวนหย่อม</option><option>ลานจอดรถ</option><option>ริมรั้ว</option>
+            <option>หน้าอาคาร</option><option>พื้นที่สีเขียว</option><option>อื่นๆ</option>
+          </select>
+        </div>
+        <div>
+          <label class="field-label">สถานะสุขภาพ</label>
+          <select id="f-health">
+            <option value="">เลือก...</option>
+            <option>ยอดเยี่ยม</option><option>ดี</option><option>ปานกลาง</option><option>ต้องดูแล</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="carbon-result">
+        <div style="font-size:12px;font-weight:600;color:var(--text2);margin-bottom:8px">ผลการคำนวณคาร์บอน</div>
+        <div class="carbon-grid">
+          <div><div class="carbon-val" id="r-dbh">—</div><div class="carbon-lbl">DBH (ซม.)</div></div>
+          <div><div class="carbon-val" id="r-carbon">—</div><div class="carbon-lbl">Carbon (kgC)</div></div>
+          <div><div class="carbon-val" id="r-co2">—</div><div class="carbon-lbl">CO₂ (kgCO₂)</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <label class="field-label">ผู้สำรวจ</label>
+      <input id="f-surveyor" placeholder="ชื่อ-นามสกุล">
+    </div>
+
+    <div style="padding:8px 12px 16px;display:flex;flex-direction:column;gap:8px">
+      <button class="btn-primary" id="save-btn" onclick="saveTree()">💾 บันทึกข้อมูล</button>
+    </div>
+  </div>
+
+  <!-- ========== SUMMARY PAGE ========== -->
+  <div class="page" id="page-summary">
+    <div class="header">
+      <span class="header-title">สรุปข้อมูลคาร์บอน</span>
+    </div>
+    <div id="summary-content"></div>
+  </div>
+
+  <!-- ========== EXPORT PAGE ========== -->
+  <div class="page" id="page-export">
+    <div class="header">
+      <span class="header-title">ส่งออกข้อมูล</span>
+    </div>
+    <div class="card" style="text-align:center;padding:20px">
+      <div style="font-size:40px;margin-bottom:8px">📊</div>
+      <div style="font-weight:600;font-size:17px" id="export-count">0 ต้น</div>
+      <div style="color:var(--text2);font-size:13px">พร้อมส่งออก</div>
+    </div>
+    <div style="padding:0 12px;display:flex;flex-direction:column;gap:8px">
+      <button class="btn-primary" onclick="downloadCSV()">⬇️ ดาวน์โหลด CSV</button>
+      <button class="btn-primary blue" onclick="openSheets()">📋 เปิด Google Sheets</button>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <div style="font-weight:600;font-size:13px;margin-bottom:8px">วิธีนำเข้า Google Sheets</div>
+      <ol class="export-steps">
+        <li class="export-step">ดาวน์โหลดไฟล์ CSV ด้วยปุ่มด้านบน</li>
+        <li class="export-step">เปิด Google Sheets → กด "ไฟล์" → "นำเข้า"</li>
+        <li class="export-step">เลือก "อัปโหลด" → เลือกไฟล์ CSV</li>
+        <li class="export-step">เลือก "ต่อท้ายข้อมูลในชีต" แล้วกด นำเข้า</li>
+      </ol>
+    </div>
+    <div class="card" style="margin-top:0">
+      <button class="btn-primary red" onclick="clearData()" style="font-size:13px">🗑️ ล้างข้อมูลในเครื่อง</button>
+    </div>
+  </div>
+
+  <!-- ========== BOTTOM NAV ========== -->
+  <nav class="nav">
+    <button class="nav-btn active" id="nav-home" onclick="goPage('home')">
+      <span class="nav-icon">🏠</span><span>หน้าหลัก</span>
+    </button>
+    <button class="nav-btn" id="nav-add" onclick="goAdd()">
+      <span class="nav-icon">➕</span><span>บันทึก</span>
+    </button>
+    <button class="nav-btn" id="nav-summary" onclick="goPage('summary')">
+      <span class="nav-icon">📊</span><span>สรุป</span>
+    </button>
+    <button class="nav-btn" id="nav-export" onclick="goPage('export')">
+      <span class="nav-icon">📤</span><span>ส่งออก</span>
+    </button>
+  </nav>
+</div>
+
+<script>
+const SHEET_ID = '1_N2nmvYyHPJJZqewxuMFlJzb3KGiM_8sCBFh3ZWu4sE';
+const SPECIES = ['ยางนา','พยุง','มะขาม','สัก','มะม่วง','ประดู่','จามจุรี','นนทรี','ราชพฤกษ์','ชมพูพันธุ์ทิพย์','อื่นๆ'];
+
+let trees = JSON.parse(localStorage.getItem('trees_lsk') || '[]');
+let nextId = trees.length ? Math.max(...trees.map(t => parseInt(t.treeId?.replace(/\D/g,''))||0)) + 1 : 1;
+let currentPage = 'home';
+
+// ---- NAV ----
+function goPage(p) {
+  document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('page-' + p).classList.add('active');
+  document.getElementById('nav-' + p)?.classList.add('active');
+  currentPage = p;
+  if (p === 'home') renderHome();
+  if (p === 'summary') renderSummary();
+  if (p === 'export') renderExport();
+  window.scrollTo(0, 0);
+}
+
+function goAdd() {
+  const id = 'T' + String(nextId).padStart(3, '0');
+  document.getElementById('f-treeId').value = id;
+  document.getElementById('f-date').value = new Date().toISOString().split('T')[0];
+  document.getElementById('f-species').value = '';
+  document.getElementById('f-circ').value = '';
+  document.getElementById('f-height').value = '';
+  document.getElementById('f-lat').value = '';
+  document.getElementById('f-lng').value = '';
+  document.getElementById('f-land').value = '';
+  document.getElementById('f-health').value = '';
+  document.getElementById('f-dbh').value = '';
+  document.getElementById('gps-status').textContent = '';
+  document.getElementById('r-dbh').textContent = '—';
+  document.getElementById('r-carbon').textContent = '—';
+  document.getElementById('r-co2').textContent = '—';
+  renderChips('');
+  goPage('add');
+}
+
+// ---- SPECIES CHIPS ----
+function renderChips(selected) {
+  const wrap = document.getElementById('species-chips');
+  wrap.innerHTML = SPECIES.map(s =>
+    `<button class="chip ${s === selected ? 'selected' : ''}" onclick="selectSpecies('${s}')">${s}</button>`
+  ).join('');
+}
+function selectSpecies(s) {
+  const val = s === 'อื่นๆ' ? '' : s;
+  document.getElementById('f-species').value = val;
+  renderChips(s === 'อื่นๆ' ? '' : s);
+}
+function syncSpecies(v) {
+  const match = SPECIES.find(s => s === v);
+  renderChips(match || '');
+}
+
+// ---- CARBON CALC ----
+function calcCarbon() {
+  const circ = parseFloat(document.getElementById('f-circ').value) || 0;
+  const h = parseFloat(document.getElementById('f-height').value) || 0;
+  const dbh = circ > 0 ? (circ / Math.PI) : 0;
+  document.getElementById('f-dbh').value = dbh > 0 ? dbh.toFixed(4) : '';
+  if (dbh > 0 && h > 0) {
+    const carbon = 0.0673 * Math.pow(0.0673 * dbh * dbh * h, 0.976);
+    const co2 = carbon * 3.67;
+    document.getElementById('r-dbh').textContent = dbh.toFixed(2);
+    document.getElementById('r-carbon').textContent = carbon.toFixed(4);
+    document.getElementById('r-co2').textContent = co2.toFixed(4);
+  } else if (dbh > 0) {
+    document.getElementById('r-dbh').textContent = dbh.toFixed(2);
+    document.getElementById('r-carbon').textContent = '—';
+    document.getElementById('r-co2').textContent = '—';
+  } else {
+    document.getElementById('r-dbh').textContent = '—';
+    document.getElementById('r-carbon').textContent = '—';
+    document.getElementById('r-co2').textContent = '—';
+  }
+}
+
+// ---- GPS ----
+function getGPS() {
+  const el = document.getElementById('gps-status');
+  el.textContent = 'กำลังระบุตำแหน่ง...';
+  if (!navigator.geolocation) { el.textContent = 'อุปกรณ์ไม่รองรับ GPS'; return; }
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      document.getElementById('f-lat').value = pos.coords.latitude.toFixed(6);
+      document.getElementById('f-lng').value = pos.coords.longitude.toFixed(6);
+      el.textContent = '✓ ' + pos.coords.latitude.toFixed(5) + ', ' + pos.coords.longitude.toFixed(5);
+    },
+    () => el.textContent = 'ไม่สามารถระบุตำแหน่งได้',
+    { enableHighAccuracy: true, timeout: 12000 }
+  );
+}
+
+// ---- SMART MEASURE ----
+function openSmartMeasure() {
+  // Try intent for Android
+  const a = document.createElement('a');
+  a.href = 'intent://open#Intent;package=si.pelajaran.smartmeasure;scheme=smartmeasure;end';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => {
+    const h = prompt('กรอกความสูงที่วัดได้จาก Smart Measure (หน่วย: เมตร)');
+    if (h !== null && h !== '' && !isNaN(h)) {
+      document.getElementById('f-height').value = parseFloat(h).toFixed(1);
+      calcCarbon();
+    }
+  }, 1500);
+}
+
+// ---- SAVE ----
+function saveTree() {
+  const treeId = document.getElementById('f-treeId').value.trim();
+  const species = document.getElementById('f-species').value.trim();
+  const circ = document.getElementById('f-circ').value.trim();
+  const date = document.getElementById('f-date').value;
+  if (!treeId || !species || !circ || !date) {
+    toast('กรุณากรอกข้อมูลที่จำเป็น: รหัสต้นไม้, ชนิดพันธุ์, เส้นรอบวง, วันที่');
+    return;
+  }
+  const dbh = circ ? (parseFloat(circ) / Math.PI) : 0;
+  const h = parseFloat(document.getElementById('f-height').value) || 0;
+  const carbon = (dbh > 0 && h > 0) ? (0.0673 * Math.pow(0.0673 * dbh * dbh * h, 0.976)) : 0;
+  const co2 = carbon * 3.67;
+  const record = {
+    treeId, surveyDate: date, species,
+    circumference: circ,
+    height: document.getElementById('f-height').value || '',
+    lat: document.getElementById('f-lat').value || '',
+    lng: document.getElementById('f-lng').value || '',
+    landType: document.getElementById('f-land').value || '',
+    healthStatus: document.getElementById('f-health').value || '',
+    surveyBy: document.getElementById('f-surveyor').value || '',
+    hospital: 'รพ.ลานสกา',
+    dbh: dbh.toFixed(4),
+    carbon: carbon.toFixed(4),
+    co2: co2.toFixed(4),
+    timestamp: new Date().toISOString()
+  };
+  trees.push(record);
+  localStorage.setItem('trees_lsk', JSON.stringify(trees));
+  nextId++;
+  toast('✓ บันทึกสำเร็จ!');
+  setTimeout(() => goPage('home'), 800);
+}
+
+// ---- RENDER HOME ----
+function renderHome() {
+  const total = trees.length;
+  const totalC = trees.reduce((s, t) => s + parseFloat(t.carbon || 0), 0);
+  const totalCO2 = trees.reduce((s, t) => s + parseFloat(t.co2 || 0), 0);
+  document.getElementById('stat-trees').textContent = total;
+  document.getElementById('stat-carbon').textContent = totalC.toFixed(1);
+  document.getElementById('stat-co2').textContent = totalCO2.toFixed(1);
+
+  const list = document.getElementById('tree-list');
+  if (total === 0) {
+    list.innerHTML = '<div class="empty"><div class="empty-icon">🌿</div><p>ยังไม่มีข้อมูลต้นไม้<br>กดปุ่มด้านบนเพื่อเริ่มบันทึก</p></div>';
+    return;
+  }
+  list.innerHTML = [...trees].reverse().map(t => `
+    <div class="tree-item">
+      <div class="tree-item-head">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="pill pill-green">${t.treeId}</span>
+          <span style="font-weight:600">${t.species}</span>
+        </div>
+        <span style="font-size:12px;color:var(--text3)">${t.surveyDate}</span>
+      </div>
+      <div class="tree-item-stats">
+        <div class="stat-box"><div class="stat-val">${t.circumference || '—'}</div><div class="stat-lbl">เส้นรอบวง (cm)</div></div>
+        <div class="stat-box"><div class="stat-val">${t.height || '—'}</div><div class="stat-lbl">ความสูง (m)</div></div>
+        <div class="stat-box"><div class="stat-val" style="color:var(--green)">${parseFloat(t.carbon||0).toFixed(2)}</div><div class="stat-lbl">Carbon (kgC)</div></div>
+      </div>
+      ${t.lat ? `<div style="font-size:11px;color:var(--text3);margin-top:6px">📍 ${t.lat}, ${t.lng}</div>` : ''}
+    </div>
+  `).join('');
+}
+
+// ---- RENDER SUMMARY ----
+function renderSummary() {
+  const totalC = trees.reduce((s, t) => s + parseFloat(t.carbon || 0), 0);
+  const totalCO2 = trees.reduce((s, t) => s + parseFloat(t.co2 || 0), 0);
+  const bySpecies = trees.reduce((acc, t) => { acc[t.species] = (acc[t.species] || 0) + 1; return acc; }, {});
+  const bySurveyor = trees.reduce((acc, t) => { if(t.surveyBy) acc[t.surveyBy] = (acc[t.surveyBy] || 0) + 1; return acc; }, {});
+
+  document.getElementById('summary-content').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px 12px 0">
+      ${[['ต้นไม้ทั้งหมด', trees.length + ' ต้น', 'var(--green)'],
+         ['Carbon รวม', totalC.toFixed(2) + ' kgC', 'var(--blue)'],
+         ['CO₂ รวม', totalCO2.toFixed(2) + ' kgCO₂', 'var(--amber)'],
+         ['เทียบเท่า', (totalCO2/1000).toFixed(4) + ' tCO₂', '#993556']
+        ].map(([l,v,c]) => `
+        <div class="metric">
+          <div class="metric-label">${l}</div>
+          <div style="font-size:18px;font-weight:600;color:${c};line-height:1.3;margin:4px 0">${v}</div>
+        </div>`).join('')}
+    </div>
+    <div class="card">
+      <div style="font-weight:600;margin-bottom:10px">ชนิดพันธุ์ไม้</div>
+      ${Object.entries(bySpecies).sort((a,b)=>b[1]-a[1]).map(([sp,cnt]) =>
+        `<div class="summary-species-item"><span>${sp}</span><span class="pill pill-green">${cnt} ต้น</span></div>`
+      ).join('') || '<p style="color:var(--text2);font-size:13px">ยังไม่มีข้อมูล</p>'}
+    </div>
+    ${Object.keys(bySurveyor).length ? `
+    <div class="card">
+      <div style="font-weight:600;margin-bottom:10px">ผู้สำรวจ</div>
+      ${Object.entries(bySurveyor).map(([name,cnt]) =>
+        `<div class="summary-species-item"><span>${name}</span><span class="pill pill-blue">${cnt} ต้น</span></div>`
+      ).join('')}
+    </div>` : ''}
+  `;
+}
+
+// ---- RENDER EXPORT ----
+function renderExport() {
+  document.getElementById('export-count').textContent = trees.length + ' ต้น';
+}
+
+// ---- DOWNLOAD CSV ----
+function downloadCSV() {
+  if (trees.length === 0) { toast('ยังไม่มีข้อมูล'); return; }
+  const header = 'Tree ID,Survey Date,Species,Circumference(cm),DBH(cm),Height(m),Lat,Long,Land Type,Health Status,Carbon(kgC),CO2(kgCO2),Survey By,Hospital,Timestamp\n';
+  const rows = trees.map(t =>
+    [t.treeId,t.surveyDate,t.species,t.circumference,t.dbh,t.height,t.lat,t.lng,t.landType,t.healthStatus,t.carbon,t.co2,t.surveyBy,t.hospital,t.timestamp].join(',')
+  ).join('\n');
+  const blob = new Blob(['\uFEFF' + header + rows], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'tree_carbon_lansaka_' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click(); URL.revokeObjectURL(url);
+  toast('ดาวน์โหลดสำเร็จ');
+}
+
+function openSheets() {
+  window.open('https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/edit', '_blank');
+}
+
+function clearData() {
+  if (confirm('ลบข้อมูลต้นไม้ทั้งหมดในเครื่องนี้?\n(ข้อมูลที่ส่งออกแล้วไม่ได้รับผลกระทบ)')) {
+    trees = []; nextId = 1;
+    localStorage.setItem('trees_lsk', '[]');
+    toast('ล้างข้อมูลแล้ว');
+    renderExport();
+  }
+}
+
+// ---- TOAST ----
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2200);
+}
+
+// ---- INIT ----
+renderChips('');
+renderHome();
+
+// ---- SERVICE WORKER ----
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
+</script>
+</body>
+</html>
