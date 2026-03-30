@@ -429,16 +429,16 @@ async function saveTree() {
 }
 
 // ---- GOOGLE SHEETS ----
+// ส่งข้อมูลด้วย no-cors (วิธีเดียวที่ใช้ได้กับ Apps Script จาก browser)
 async function sendToSheets(rec) {
   const url=localStorage.getItem('gs_url');
   if(!url)return false;
   try {
-    const res=await fetch(url,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(rec)
-    });
-    return res.ok;
+    // ส่งเป็น FormData เพื่อหลีก CORS preflight
+    const form=new FormData();
+    form.append('data', JSON.stringify(rec));
+    await fetch(url, {method:'POST', body:form, mode:'no-cors'});
+    return true; // no-cors ไม่สามารถอ่าน response ได้ ถือว่าสำเร็จ
   } catch(e){return false;}
 }
 
@@ -454,23 +454,22 @@ async function syncAll() {
     if(sent){rec.synced=true;ok++;}
   }
   saveLoc();renderExport();
-  toast(`ส่งสำเร็จ ${ok}/${pending.length} รายการ`);
+  toast(`ส่ง ${ok}/${pending.length} รายการแล้ว กรุณาตรวจสอบใน Sheets`);
 }
 
 async function testGS() {
   const url=document.getElementById('gs-url').value.trim();
   if(!url){toast('กรุณากรอก URL ก่อน');return;}
-  localStorage.setItem('gs_url',url);gsURL=url;
-  document.getElementById('gs-result').textContent='กำลังทดสอบ...';
+  localStorage.setItem('gs_url',url);
+  document.getElementById('gs-result').textContent='กำลังบันทึก URL...';
+  // no-cors ทดสอบด้วยการส่ง ping record
   try{
-    const res=await fetch(url+'?test=1');
-    if(res.ok){
-      document.getElementById('gs-result').textContent='✅ เชื่อมต่อสำเร็จ! พร้อมส่งข้อมูลอัตโนมัติ';
-    } else {
-      document.getElementById('gs-result').textContent='⚠️ เชื่อมต่อได้ แต่ Apps Script ตอบกลับผิดปกติ';
-    }
+    const form=new FormData();
+    form.append('data', JSON.stringify({treeId:'TEST',surveyDate:new Date().toISOString().slice(0,10),species:'ทดสอบ',circumference:'1',dbh:'0.3',height:'1',lat:'',lng:'',landType:'',healthStatus:'',carbon:'0',co2:'0',surveyBy:'TEST',hospital:'TEST',timestamp:new Date().toISOString()}));
+    await fetch(url,{method:'POST',body:form,mode:'no-cors'});
+    document.getElementById('gs-result').textContent='✅ บันทึก URL สำเร็จ! ลองบันทึกต้นไม้แล้วตรวจสอบใน Google Sheets ครับ';
   }catch(e){
-    document.getElementById('gs-result').textContent='❌ เชื่อมต่อไม่ได้ ตรวจสอบ URL อีกครั้ง';
+    document.getElementById('gs-result').textContent='❌ URL ไม่ถูกต้อง ลองวาง URL ใหม่อีกครั้ง';
   }
 }
 
