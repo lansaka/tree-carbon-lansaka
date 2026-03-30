@@ -267,7 +267,7 @@ input[readonly]{background:var(--bg2);color:var(--text2)}
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const SP = ['ยางนา','พยุง','มะขาม','สัก','มะม่วง','ประดู่','จามจุรี','นนทรี','ราชพฤกษ์','ชมพูพันธุ์ทิพย์','อื่นๆ'];
+const SP = ['มังคุด','พยุง','มะขาม','สัก','มะม่วง','ประดู่','จามจุรี','มะพร้าว','ราชพฤกษ์','ตะเคียนทอง','อื่นๆ'];
 const SHEET_ID = '1_N2nmvYyHPJJZqewxuMFlJzb3KGiM_8sCBFh3ZWu4sE';
 
 let trees = JSON.parse(localStorage.getItem('trees_lsk')||'[]');
@@ -527,7 +527,7 @@ function renderMap(){
     const bounds=[];
     withGPS.forEach(t=>{
       const lat=parseFloat(t.lat),lng=parseFloat(t.lng);
-      const color=t.healthStatus==='ยอดเยี่ยม'?'#1D9E75':t.healthStatus==='ดี'?'#378ADD':t.healthStatus==='ต้องดูแล'?'#E24B4A':'#BA7517';
+      const color=t.healthStatus==='สมบูรณ์ดีมาก'?'#1D9E75':t.healthStatus==='ดี'?'#378ADD':t.healthStatus==='ต้องดูแล'?'#E24B4A':'#BA7517';
       const m=L.circleMarker([lat,lng],{radius:10,fillColor:color,color:'#fff',weight:2,fillOpacity:0.9}).addTo(mapInst);
       const pop=`<div style="font-family:sans-serif;min-width:140px">
         <b>${t.treeId} — ${t.species}</b><br>
