@@ -445,20 +445,20 @@ async function saveTree(){
   setTimeout(()=>goPage('home'),1400);
 }
 
-// ---- SEND TO SHEETS (FormData + no-cors) ----
+// ---- SEND TO SHEETS (GET + query string — ใช้ได้กับ no-cors แน่นอน) ----
 async function sendOne(rec){
   const url=localStorage.getItem('gs_url');
   if(!url)return false;
   try{
-    const fd=new FormData();
-    fd.append('data',JSON.stringify({
+    const payload={
       treeId:rec.treeId,surveyDate:rec.surveyDate,species:rec.species,
       circumference:rec.circumference,dbh:rec.dbh,height:rec.height,
       lat:rec.lat,lng:rec.lng,landType:rec.landType,
       healthStatus:rec.healthStatus,carbon:rec.carbon,co2:rec.co2,
       surveyBy:rec.surveyBy,hospital:rec.hospital,timestamp:rec.timestamp
-    }));
-    await fetch(url,{method:'POST',body:fd,mode:'no-cors'});
+    };
+    const fullUrl=url+'?d='+encodeURIComponent(JSON.stringify(payload));
+    await fetch(fullUrl,{method:'GET',mode:'no-cors'});
     return true;
   }catch(e){return false;}
 }
@@ -483,12 +483,16 @@ async function testGS(){
   const res=document.getElementById('gs-res');
   res.textContent='กำลังทดสอบ...';
   try{
-    const fd=new FormData();
-    fd.append('data',JSON.stringify({treeId:'PING',surveyDate:new Date().toISOString().slice(0,10),species:'ทดสอบ',circumference:'1',dbh:'0.3',height:'1',lat:'',lng:'',landType:'',healthStatus:'',carbon:'0',co2:'0',surveyBy:'PING',hospital:'TEST',timestamp:new Date().toISOString()}));
-    await fetch(url,{method:'POST',body:fd,mode:'no-cors'});
-    res.textContent='✅ บันทึก URL สำเร็จ! ลองบันทึกต้นไม้แล้วเช็ค Google Sheets ครับ';
+    // ทดสอบด้วย GET ping
+    const r=await fetch(url+'?ping=1');
+    const json=await r.json();
+    if(json.status==='ok'){
+      res.textContent='✅ เชื่อมต่อสำเร็จ! Sheets มีข้อมูล '+json.rows+' แถว';
+    } else {
+      res.textContent='⚠️ ตอบกลับแล้วแต่มีปัญหา: '+json.message;
+    }
   }catch(e){
-    res.textContent='❌ URL ไม่ถูกต้อง ลองวาง URL ใหม่';
+    res.textContent='❌ เชื่อมต่อไม่ได้ ตรวจสอบ URL อีกครั้ง ('+e.message+')';
   }
 }
 
