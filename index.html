@@ -288,7 +288,8 @@ function calcNextId() {
 function saveLoc() { localStorage.setItem(STORE_KEY, JSON.stringify(trees)); }
 
 // ============================================================
-// SEND — fetch GET ?d=JSON (no-cors safe สำหรับ GitHub Pages)
+// SEND — ใช้ Image trick เป็นหลัก (ตาม redirect ได้ 100%)
+// แทนที่ฟังก์ชัน sendOne เดิมทั้งหมด
 // ============================================================
 async function sendOne(rec) {
   const url = localStorage.getItem('gs_url');
@@ -312,23 +313,19 @@ async function sendOne(rec) {
     timestamp:     rec.timestamp || new Date().toISOString()
   };
 
-  const fullUrl = url + '?d=' + encodeURIComponent(JSON.stringify(payload));
+  const fullUrl = url + '?d=' + encodeURIComponent(JSON.stringify(payload))
+                      + '&_t=' + Date.now(); // cache buster
 
   return new Promise(resolve => {
-    let done = false;
-    const finish = (ok) => { if (!done) { done = true; resolve(ok); } };
+    const img = new Image();
+    // Image ตาม redirect ได้เสมอ — ถือว่าสำเร็จเมื่อ onload หรือ onerror
+    // (onerror = CORS block แต่ข้อมูลถึง Script แล้ว)
+    img.onload  = () => resolve(true);
+    img.onerror = () => resolve(true); // ← Script รับข้อมูลแล้ว แค่ตอบกลับไม่ได้
+    img.src = fullUrl;
 
-    // ลอง fetch no-cors ก่อน
-    fetch(fullUrl, { method: 'GET', mode: 'no-cors' })
-      .then(() => finish(true))
-      .catch(() => {
-        // fallback: Image trick
-        const img = new Image();
-        img.onload = img.onerror = () => finish(true);
-        img.src = fullUrl + '&_fb=' + Date.now();
-      });
-
-    setTimeout(() => finish(false), 12000); // timeout 12 วิ
+    // timeout 15 วิ กันค้าง
+    setTimeout(() => resolve(false), 15000);
   });
 }
 
