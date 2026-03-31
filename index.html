@@ -22,8 +22,7 @@
   --bg:#fff;--bg2:#f5f5f3;--bg3:#ebebea;
   --tx:#1a1a18;--tx2:#5f5e5a;--tx3:#9c9a92;
   --br:rgba(0,0,0,0.12);--br2:rgba(0,0,0,0.22);
-  --r:12px;--rs:8px;
-  --f:'Sarabun',system-ui,sans-serif;
+  --r:12px;--rs:8px;--f:'Sarabun',system-ui,sans-serif;
 }
 @media(prefers-color-scheme:dark){
   :root{--bg:#1c1c1a;--bg2:#2a2a27;--bg3:#333330;--tx:#e8e6dc;--tx2:#9c9a92;--tx3:#66645e;--br:rgba(255,255,255,0.1);--br2:rgba(255,255,255,0.2)}
@@ -37,24 +36,23 @@ body{font-family:var(--f);background:var(--bg);color:var(--tx);font-size:15px}
 .back{background:none;border:none;color:var(--g);font-size:15px;cursor:pointer;padding:4px 8px;font-family:var(--f)}
 .nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:var(--bg);border-top:0.5px solid var(--br);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom)}
 .nb{flex:1;background:none;border:none;padding:7px 2px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--f);font-size:10px;color:var(--tx2)}
-.nb.active{color:var(--g)}
-.ni{font-size:19px}
+.nb.active{color:var(--g)}.ni{font-size:19px}
 .card{background:var(--bg);border:0.5px solid var(--br);border-radius:var(--r);padding:13px 15px;margin:8px 12px}
 .met3{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:11px 12px 0}
 .met{background:var(--bg2);border-radius:var(--rs);padding:9px 7px;text-align:center}
 .mv{font-size:21px;font-weight:700;line-height:1.1;margin:2px 0}
 .ml{font-size:11px;color:var(--tx2)}.mu{font-size:10px;color:var(--tx3)}
 label.fl{display:block;font-size:12px;color:var(--tx2);margin-bottom:4px;font-weight:500}
-input,select,textarea{width:100%;padding:9px 11px;border:0.5px solid var(--br2);border-radius:var(--rs);font-size:15px;background:var(--bg);color:var(--tx);font-family:var(--f);outline:none}
+input,select{width:100%;padding:9px 11px;border:0.5px solid var(--br2);border-radius:var(--rs);font-size:15px;background:var(--bg);color:var(--tx);font-family:var(--f);outline:none}
 input:focus,select:focus{border-color:var(--g)}
 input[readonly]{background:var(--bg2);color:var(--tx2)}
 .r2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 .bp{background:var(--g);color:#fff;border:none;border-radius:var(--rs);padding:12px;width:100%;font-size:15px;font-weight:600;cursor:pointer;font-family:var(--f);transition:opacity .15s}
-.bp:active{opacity:.85}.bp:disabled{opacity:.5}
+.bp:active{opacity:.85}.bp:disabled{opacity:.5;cursor:not-allowed}
 .bp.blue{background:var(--b)}.bp.red{background:var(--rd)}
 .bp.gray{background:var(--bg2);color:var(--tx);border:0.5px solid var(--br2)}
 .bgps{background:var(--gl);color:var(--gd);border:0.5px solid var(--g);border-radius:var(--rs);padding:9px 12px;font-size:13px;cursor:pointer;font-family:var(--f);display:flex;align-items:center;gap:5px}
-.bsm{background:var(--bl);color:var(--b);border:0.5px solid var(--b);border-radius:var(--rs);padding:9px 12px;font-size:13px;cursor:pointer;font-family:var(--f);display:flex;align-items:center;gap:5px}
+.bsm{background:var(--bl);color:var(--b);border:0.5px solid var(--b);border-radius:var(--rs);padding:9px 12px;font-size:13px;cursor:pointer;font-family:var(--f)}
 .chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:7px}
 .chip{background:var(--bg2);border:0.5px solid var(--br);border-radius:20px;padding:5px 11px;font-size:13px;cursor:pointer;color:var(--tx2);font-family:var(--f)}
 .chip.sel{background:var(--g);color:#fff;border-color:var(--g)}
@@ -71,7 +69,7 @@ input[readonly]{background:var(--bg2);color:var(--tx2)}
 .toast.show{opacity:1}
 .gst{font-size:12px;color:var(--g);margin-top:4px;flex:1}
 .empty{text-align:center;padding:36px 18px;color:var(--tx2)}
-.pw{position:relative;width:100%;aspect-ratio:4/3;background:var(--bg2);border-radius:var(--rs);overflow:hidden;margin-top:6px;border:0.5px solid var(--br)}
+.pw{width:100%;aspect-ratio:4/3;background:var(--bg2);border-radius:var(--rs);overflow:hidden;margin-top:6px;border:0.5px solid var(--br)}
 .pw img{width:100%;height:100%;object-fit:cover;display:block}
 .pp{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:6px;color:var(--tx3);font-size:13px;cursor:pointer}
 .pbtns{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:7px}
@@ -82,8 +80,7 @@ input[readonly]{background:var(--bg2);color:var(--tx2)}
 .mfc.sel{background:var(--g);color:#fff;border-color:var(--g)}
 .db2{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:11px 12px 0}
 .dbc{background:var(--bg2);border-radius:var(--rs);padding:10px 11px}
-.dbl{font-size:11px;color:var(--tx2);margin-bottom:3px}
-.dbv{font-size:19px;font-weight:700}
+.dbl{font-size:11px;color:var(--tx2);margin-bottom:3px}.dbv{font-size:19px;font-weight:700}
 .cw{margin:10px 12px 0;background:var(--bg);border:0.5px solid var(--br);border-radius:var(--r);padding:12px}
 .br-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
 .br-l{font-size:11px;color:var(--tx2);width:36px;text-align:right;flex-shrink:0}
@@ -94,16 +91,16 @@ input[readonly]{background:var(--bg2);color:var(--tx2)}
 .sm-sheet{background:var(--bg);border-radius:16px 16px 0 0;padding:20px 16px 32px;width:100%;max-width:480px}
 .sm-title{font-size:16px;font-weight:600;margin-bottom:14px;text-align:center}
 .sm-input{font-size:28px;font-weight:700;text-align:center;border:2px solid var(--g);border-radius:var(--rs);padding:12px;margin-bottom:14px;width:100%;background:var(--bg);color:var(--tx)}
-/* Sync status bar */
-.sync-bar{background:var(--al);border-left:3px solid var(--am);padding:8px 14px;font-size:12px;color:var(--am);display:none}
-.sync-bar.ok{background:var(--gl);border-color:var(--g);color:var(--gd)}
+/* progress bar สำหรับ sync */
+.prog-wrap{background:var(--bg2);border-radius:4px;height:6px;margin-top:8px;overflow:hidden;display:none}
+.prog-bar{height:100%;background:var(--g);border-radius:4px;transition:width .3s}
 </style>
 </head>
 <body>
 <div class="app">
 <div class="toast" id="toast"></div>
 
-<!-- HOME -->
+<!-- ===== HOME ===== -->
 <div class="page active" id="page-home">
   <div class="hdr">
     <span style="font-size:21px">🌳</span>
@@ -120,7 +117,7 @@ input[readonly]{background:var(--bg2);color:var(--tx2)}
   <div id="tree-list"></div>
 </div>
 
-<!-- ADD -->
+<!-- ===== ADD ===== -->
 <div class="page" id="page-add">
   <div class="hdr">
     <button class="back" onclick="goPage('home')">← กลับ</button>
@@ -148,7 +145,7 @@ input[readonly]{background:var(--bg2);color:var(--tx2)}
     <label class="fl">ความสูง (เมตร)</label>
     <div style="display:flex;gap:7px;align-items:center">
       <input type="number" id="f-h" placeholder="0.0" oninput="calcC()" inputmode="decimal" style="flex:1">
-      <button class="bsm" onclick="openSMModal()" style="white-space:nowrap">📏 Smart Measure</button>
+      <button class="bsm" onclick="openSM()">📏 Smart Measure</button>
     </div>
   </div>
   <div class="card">
@@ -158,8 +155,8 @@ input[readonly]{background:var(--bg2);color:var(--tx2)}
       <span id="gps-st" class="gst"></span>
     </div>
     <div class="r2">
-      <div><label class="fl">Latitude</label><input type="number" id="f-lat" placeholder="7.xxxxx" step="0.000001" inputmode="decimal"></div>
-      <div><label class="fl">Longitude</label><input type="number" id="f-lng" placeholder="99.xxxxx" step="0.000001" inputmode="decimal"></div>
+      <div><label class="fl">Latitude</label><input type="number" id="f-lat" placeholder="9.xxxxx" step="0.000001" inputmode="decimal"></div>
+      <div><label class="fl">Longitude</label><input type="number" id="f-lng" placeholder="100.xxxxx" step="0.000001" inputmode="decimal"></div>
     </div>
   </div>
   <div class="card">
@@ -175,7 +172,7 @@ input[readonly]{background:var(--bg2);color:var(--tx2)}
   <div class="card">
     <label class="fl">รูปถ่ายต้นไม้</label>
     <div class="pw" id="pw" onclick="pickAny()">
-      <div class="pp" id="pp"><span style="font-size:32px">📷</span><span>แตะเพื่อถ่ายรูปหรือเลือกจากคลัง</span></div>
+      <div class="pp"><span style="font-size:32px">📷</span><span>แตะเพื่อถ่ายรูปหรือเลือกจากคลัง</span></div>
     </div>
     <div class="pbtns">
       <button class="pbtn" onclick="takePhoto()">📷 ถ่ายรูปจากกล้อง</button>
@@ -200,20 +197,20 @@ input[readonly]{background:var(--bg2);color:var(--tx2)}
   </div>
 </div>
 
-<!-- MAP -->
+<!-- ===== MAP ===== -->
 <div class="page" id="page-map">
   <div class="hdr"><span class="hdr-t">แผนที่ต้นไม้</span></div>
   <div class="map-filter" id="map-filter"></div>
   <div id="map-view"></div>
 </div>
 
-<!-- DASHBOARD -->
+<!-- ===== DASHBOARD ===== -->
 <div class="page" id="page-dash">
   <div class="hdr"><span class="hdr-t">Dashboard คาร์บอน</span></div>
   <div id="dash-content"></div>
 </div>
 
-<!-- EXPORT -->
+<!-- ===== EXPORT / SETTINGS ===== -->
 <div class="page" id="page-export">
   <div class="hdr"><span class="hdr-t">ส่งออก / ตั้งค่า</span></div>
   <div class="card">
@@ -221,7 +218,7 @@ input[readonly]{background:var(--bg2);color:var(--tx2)}
     <label class="fl">Web App URL (จาก Apps Script)</label>
     <input id="gs-url" placeholder="https://script.google.com/macros/s/..." style="margin-bottom:8px">
     <button class="bp" onclick="testGS()">🧪 บันทึก URL และทดสอบ</button>
-    <div id="gs-res" style="font-size:12px;margin-top:7px;color:var(--tx2)"></div>
+    <div id="gs-res" style="font-size:12px;margin-top:7px"></div>
   </div>
   <div class="card">
     <div style="font-weight:600;margin-bottom:10px;font-size:14px">📊 สถานะข้อมูล</div>
@@ -229,8 +226,11 @@ input[readonly]{background:var(--bg2);color:var(--tx2)}
       <div class="met"><div class="ml">รอส่ง</div><div class="mv" id="ex-p" style="color:var(--am)">0</div><div class="mu">รายการ</div></div>
       <div class="met"><div class="ml">ส่งแล้ว</div><div class="mv" id="ex-s" style="color:var(--g)">0</div><div class="mu">รายการ</div></div>
     </div>
+    <div id="sync-prog-wrap" class="prog-wrap"><div id="sync-prog" class="prog-bar" style="width:0%"></div></div>
+    <div id="sync-msg" style="font-size:12px;color:var(--tx2);margin-top:6px;text-align:center"></div>
     <div style="display:flex;flex-direction:column;gap:7px;margin-top:10px">
-      <button class="bp" onclick="syncAll()">☁️ ส่งข้อมูลทั้งหมดไป Sheets</button>
+      <button class="bp" id="sync-btn" onclick="syncAll()">☁️ ส่งข้อมูลทั้งหมดไป Sheets</button>
+      <button class="bp" onclick="resetSynced()" style="background:var(--am)">🔄 รีเซ็ต Sync (ส่งซ้ำทั้งหมด)</button>
       <button class="bp blue" onclick="dlCSV()">⬇️ ดาวน์โหลด CSV</button>
       <button class="bp gray" onclick="openSheets()">📋 เปิด Google Sheets</button>
     </div>
@@ -240,404 +240,573 @@ input[readonly]{background:var(--bg2);color:var(--tx2)}
   </div>
 </div>
 
-<!-- Smart Measure Modal -->
+<!-- ===== Smart Measure Modal ===== -->
 <div id="sm-overlay" class="sm-overlay" style="display:none" onclick="closeSM(event)">
   <div class="sm-sheet" onclick="event.stopPropagation()">
     <div class="sm-title">📏 กรอกความสูงจาก Smart Measure</div>
     <input type="number" class="sm-input" id="sm-val" placeholder="0.0" inputmode="decimal" step="0.1">
     <button class="bp" onclick="confirmSM()" style="margin-bottom:8px">✓ ยืนยัน</button>
     <button class="bp gray" onclick="document.getElementById('sm-overlay').style.display='none'">ยกเลิก</button>
+    <div style="margin-top:12px;font-size:12px;color:var(--tx2);text-align:center">
+      วัดความสูงด้วยแอป Smart Measure แล้วกรอกค่ากลับมาที่นี่
+    </div>
   </div>
 </div>
 
-<!-- NAV -->
+<!-- ===== NAV ===== -->
 <nav class="nav">
-  <button class="nb active" id="nav-home" onclick="goPage('home')"><span class="ni">🏠</span><span>หน้าหลัก</span></button>
-  <button class="nb" id="nav-add" onclick="goAdd()"><span class="ni">➕</span><span>บันทึก</span></button>
-  <button class="nb" id="nav-map" onclick="goPage('map')"><span class="ni">🗺️</span><span>แผนที่</span></button>
-  <button class="nb" id="nav-dash" onclick="goPage('dash')"><span class="ni">📊</span><span>Dashboard</span></button>
-  <button class="nb" id="nav-export" onclick="goPage('export')"><span class="ni">⚙️</span><span>ตั้งค่า</span></button>
+  <button class="nb active" id="nav-home"   onclick="goPage('home')">  <span class="ni">🏠</span><span>หน้าหลัก</span></button>
+  <button class="nb"        id="nav-add"    onclick="goAdd()">          <span class="ni">➕</span><span>บันทึก</span></button>
+  <button class="nb"        id="nav-map"    onclick="goPage('map')">    <span class="ni">🗺️</span><span>แผนที่</span></button>
+  <button class="nb"        id="nav-dash"   onclick="goPage('dash')">   <span class="ni">📊</span><span>Dashboard</span></button>
+  <button class="nb"        id="nav-export" onclick="goPage('export')"> <span class="ni">⚙️</span><span>ตั้งค่า</span></button>
 </nav>
-</div>
+</div><!-- /app -->
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const SP=['ยางนา','พยุง','มะขาม','สัก','มะม่วง','ประดู่','จามจุรี','นนทรี','ราชพฤกษ์','ชมพูพันธุ์ทิพย์','อื่นๆ'];
-const SHEET_ID='1_N2nmvYyHPJJZqewxuMFlJzb3KGiM_8sCBFh3ZWu4sE';
-const HOSPITAL='รพ.ลานสกา';
+// ============================================================
+// CONFIG
+// ============================================================
+const SP = ['ยางนา','พยุง','มะขาม','สัก','มะม่วง','ประดู่','จามจุรี','นนทรี','ราชพฤกษ์','ชมพูพันธุ์ทิพย์','อื่นๆ'];
+const SHEET_ID  = '1_N2nmvYyHPJJZqewxuMFlJzb3KGiM_8sCBFh3ZWu4sE';
+const HOSPITAL  = 'รพ.ลานสกา';
+const STORE_KEY = 'trees_lsk';
 
-let trees=JSON.parse(localStorage.getItem('trees_lsk')||'[]');
-let photoData='';
-let mapInst=null;
-let nextId=trees.length?Math.max(...trees.map(t=>parseInt(t.treeId?.replace(/\D/g,''))||0))+1:1;
+// ============================================================
+// STATE
+// ============================================================
+let trees   = JSON.parse(localStorage.getItem(STORE_KEY) || '[]');
+let photoData = '';
+let mapInst   = null;
+let nextId    = calcNextId();
 
-// ========================================
-// SEND TO SHEETS — fetch GET ?d=JSON
-// วิธีนี้ผ่าน CORS ได้เพราะ Apps Script
-// deploy as "Anyone" รองรับ no-cors GET
-// ========================================
+function calcNextId() {
+  if (!trees.length) return 1;
+  return Math.max(...trees.map(t => parseInt(t.treeId?.replace(/\D/g,'')) || 0)) + 1;
+}
+function saveLoc() { localStorage.setItem(STORE_KEY, JSON.stringify(trees)); }
+
+// ============================================================
+// SEND — fetch GET ?d=JSON (no-cors safe สำหรับ GitHub Pages)
+// ============================================================
 async function sendOne(rec) {
   const url = localStorage.getItem('gs_url');
   if (!url) return false;
 
-  // สร้าง payload — ตรงกับ appendRow ใน Apps Script
   const payload = {
-    treeId:       rec.treeId,
-    surveyDate:   rec.surveyDate,
-    species:      rec.species,
-    circumference:rec.circumference,  // ← ชื่อตรงกับโค้ด Apps Script
-    dbh:          rec.dbh,
-    height:       rec.height,
-    lat:          rec.lat,
-    lng:          rec.lng,
-    landType:     rec.landType,
-    healthStatus: rec.healthStatus,
-    carbon:       rec.carbon,
-    co2:          rec.co2,
-    surveyBy:     rec.surveyBy,
-    hospital:     rec.hospital || HOSPITAL,
-    timestamp:    rec.timestamp
+    treeId:        rec.treeId,
+    surveyDate:    rec.surveyDate,
+    species:       rec.species,
+    circumference: rec.circumference || rec.circ || '',
+    dbh:           rec.dbh,
+    height:        rec.height,
+    lat:           rec.lat,
+    lng:           rec.lng,
+    landType:      rec.landType,
+    healthStatus:  rec.healthStatus,
+    carbon:        rec.carbon,
+    co2:           rec.co2,
+    surveyBy:      rec.surveyBy,
+    hospital:      rec.hospital || HOSPITAL,
+    timestamp:     rec.timestamp || new Date().toISOString()
   };
 
   const fullUrl = url + '?d=' + encodeURIComponent(JSON.stringify(payload));
 
-  // ---- วิธีที่ 1: fetch no-cors (ไม่รู้ผล แต่ส่งได้) ----
-  // ใช้ Image trick แทนเพื่อให้ทำงานได้บน iOS ด้วย
   return new Promise(resolve => {
-    // ลอง fetch ก่อน (ได้ผลจริง)
+    let done = false;
+    const finish = (ok) => { if (!done) { done = true; resolve(ok); } };
+
+    // ลอง fetch no-cors ก่อน
     fetch(fullUrl, { method: 'GET', mode: 'no-cors' })
-      .then(() => {
-        // no-cors ไม่รู้ response — ส่งต่อไปตรวจด้วย ping
-        resolve(true);
-      })
+      .then(() => finish(true))
       .catch(() => {
         // fallback: Image trick
         const img = new Image();
-        img.onload = img.onerror = () => resolve(true);
-        img.src = fullUrl + '&_t=' + Date.now();
+        img.onload = img.onerror = () => finish(true);
+        img.src = fullUrl + '&_fb=' + Date.now();
       });
-    // timeout 10 วิ
-    setTimeout(() => resolve(false), 10000);
+
+    setTimeout(() => finish(false), 12000); // timeout 12 วิ
   });
 }
 
-// ---- ทดสอบการเชื่อมต่อ (อ่าน response จริง) ----
+// ============================================================
+// TEST CONNECTION
+// ============================================================
 async function testGS() {
   const url = document.getElementById('gs-url').value.trim();
   if (!url) { toast('กรุณากรอก URL ก่อน'); return; }
   localStorage.setItem('gs_url', url);
   const res = document.getElementById('gs-res');
-  res.textContent = '⏳ กำลังทดสอบ...';
-
+  res.innerHTML = '<span style="color:var(--tx2)">⏳ กำลังทดสอบ...</span>';
   try {
-    // ทดสอบด้วย fetch ปกติ (ไม่ no-cors) เพื่อดู response
     const r = await Promise.race([
       fetch(url + '?ping=1'),
       new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 8000))
     ]);
     if (r.ok) {
       const j = await r.json();
-      res.innerHTML = `<span style="color:var(--g)">✅ ${j.message || 'เชื่อมต่อสำเร็จ!'} (${j.rows ?? '?'} แถว)</span>`;
+      res.innerHTML = `<span style="color:var(--g)">✅ ${j.message || 'เชื่อมต่อสำเร็จ!'} (${j.rows ?? '?'} แถวใน Sheet)</span>`;
     } else {
-      res.innerHTML = `<span style="color:var(--am)">⚠️ HTTP ${r.status} — URL บันทึกแล้ว ลองส่งข้อมูลได้เลย</span>`;
+      res.innerHTML = `<span style="color:var(--am)">⚠️ HTTP ${r.status} — URL บันทึกแล้ว</span>`;
     }
-  } catch(e) {
-    // CORS block — ยังส่งได้ด้วย no-cors
-    res.innerHTML = `<span style="color:var(--g)">✅ URL บันทึกแล้ว ลองบันทึกต้นไม้แล้วเช็ค Google Sheets ครับ</span>`;
+  } catch (_) {
+    res.innerHTML = `<span style="color:var(--g)">✅ URL บันทึกแล้ว — ลองบันทึกต้นไม้แล้วเช็ค Sheets ครับ</span>`;
   }
 }
 
-// ---- SYNC ALL ----
+// ============================================================
+// SYNC ALL
+// ============================================================
 async function syncAll() {
   const url = localStorage.getItem('gs_url');
-  if (!url) { toast('กรุณาตั้งค่า Apps Script URL ก่อน'); return; }
+  if (!url) { toast('กรุณาตั้งค่า URL ก่อน'); return; }
   const pending = trees.filter(t => !t.synced);
   if (!pending.length) { toast('✅ ข้อมูลทั้งหมดส่งแล้ว'); return; }
-  toast('⏳ กำลังส่ง ' + pending.length + ' รายการ...');
+
+  const btn = document.getElementById('sync-btn');
+  const wrap = document.getElementById('sync-prog-wrap');
+  const bar  = document.getElementById('sync-prog');
+  const msg  = document.getElementById('sync-msg');
+
+  btn.disabled = true;
+  wrap.style.display = 'block';
   let ok = 0;
-  for (const r of pending) {
-    const sent = await sendOne(r);
-    if (sent) { r.synced = true; ok++; }
-    await new Promise(res => setTimeout(res, 500)); // หน่วง 0.5 วิ/ต้น
+
+  for (let i = 0; i < pending.length; i++) {
+    msg.textContent = `ส่ง ${i + 1}/${pending.length} — ${pending[i].treeId}`;
+    bar.style.width = ((i / pending.length) * 100) + '%';
+    const sent = await sendOne(pending[i]);
+    if (sent) { pending[i].synced = true; ok++; }
+    await delay(600);
   }
+
+  bar.style.width = '100%';
   saveLoc();
   renderExport();
-  toast(`✅ ส่งแล้ว ${ok}/${pending.length} รายการ — เช็ค Google Sheets ได้เลย`);
+  btn.disabled = false;
+  wrap.style.display = 'none';
+  msg.textContent = '';
+  toast(`✅ ส่งสำเร็จ ${ok}/${pending.length} รายการ — เช็ค Google Sheets ได้เลย`);
 }
 
-// ---- NAV ----
-function goPage(p){
-  document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));
-  document.querySelectorAll('.nb').forEach(e=>e.classList.remove('active'));
-  document.getElementById('page-'+p).classList.add('active');
-  document.getElementById('nav-'+p)?.classList.add('active');
-  window.scrollTo(0,0);
-  if(p==='home')renderHome();
-  if(p==='map')renderMap();
-  if(p==='dash')renderDash();
-  if(p==='export')renderExport();
+// รีเซ็ต synced = false ทั้งหมด แล้วส่งใหม่
+function resetSynced() {
+  if (!confirm('รีเซ็ต Sync Status และส่งข้อมูลทั้งหมดไป Sheets อีกครั้ง?')) return;
+  trees.forEach(t => t.synced = false);
+  saveLoc();
+  renderExport();
+  toast('รีเซ็ตแล้ว กด "ส่งข้อมูลทั้งหมด" เพื่อส่งซ้ำ');
 }
-function goAdd(){
-  const id='T'+String(nextId).padStart(3,'0');
-  document.getElementById('f-id').value=id;
-  document.getElementById('f-date').value=new Date().toISOString().split('T')[0];
-  ['f-sp','f-circ','f-h','f-lat','f-lng','f-who','f-dbh'].forEach(i=>document.getElementById(i).value='');
-  document.getElementById('f-land').value='';
-  document.getElementById('f-hlth').value='';
-  document.getElementById('gps-st').textContent='';
-  document.getElementById('add-st').textContent='';
-  document.getElementById('r-d').textContent='—';
-  document.getElementById('r-c').textContent='—';
-  document.getElementById('r-co2').textContent='—';
-  document.getElementById('pw').innerHTML='<div class="pp" id="pp" onclick="pickAny()"><span style="font-size:32px">📷</span><span>แตะเพื่อถ่ายรูปหรือเลือกจากคลัง</span></div>';
-  photoData='';
+
+const delay = ms => new Promise(r => setTimeout(r, ms));
+
+// ============================================================
+// NAV
+// ============================================================
+function goPage(p) {
+  document.querySelectorAll('.page').forEach(e => e.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(e => e.classList.remove('active'));
+  document.getElementById('page-' + p).classList.add('active');
+  document.getElementById('nav-' + p)?.classList.add('active');
+  window.scrollTo(0, 0);
+  if (p === 'home')   renderHome();
+  if (p === 'map')    renderMap();
+  if (p === 'dash')   renderDash();
+  if (p === 'export') renderExport();
+}
+
+function goAdd() {
+  nextId = calcNextId();
+  const id = 'T' + String(nextId).padStart(3, '0');
+  document.getElementById('f-id').value   = id;
+  document.getElementById('f-date').value = new Date().toISOString().split('T')[0];
+  ['f-sp','f-circ','f-h','f-lat','f-lng','f-who','f-dbh']
+    .forEach(i => document.getElementById(i).value = '');
+  document.getElementById('f-land').value  = '';
+  document.getElementById('f-hlth').value  = '';
+  document.getElementById('gps-st').textContent = '';
+  document.getElementById('add-st').textContent = '';
+  ['r-d','r-c','r-co2'].forEach(i => document.getElementById(i).textContent = '—');
+  document.getElementById('pw').innerHTML =
+    '<div class="pp"><span style="font-size:32px">📷</span><span>แตะเพื่อถ่ายรูปหรือเลือกจากคลัง</span></div>';
+  photoData = '';
   renderChips('');
   goPage('add');
 }
 
-function renderChips(sel){
-  document.getElementById('sp-chips').innerHTML=SP.map(s=>`<button class="chip ${s===sel?'sel':''}" onclick="selSp('${s}')">${s}</button>`).join('');
+// ============================================================
+// SPECIES CHIPS
+// ============================================================
+function renderChips(sel) {
+  document.getElementById('sp-chips').innerHTML = SP.map(s =>
+    `<button class="chip ${s===sel?'sel':''}" onclick="selSp('${s}')">${s}</button>`
+  ).join('');
 }
-function selSp(s){document.getElementById('f-sp').value=s==='อื่นๆ'?'':s;renderChips(s==='อื่นๆ'?'':s);}
-function syncSp(v){renderChips(SP.find(s=>s===v)||'');}
+function selSp(s) {
+  document.getElementById('f-sp').value = s === 'อื่นๆ' ? '' : s;
+  renderChips(s === 'อื่นๆ' ? '' : s);
+}
+function syncSp(v) { renderChips(SP.find(s => s === v) || ''); }
 
-function calcC(){
-  const c=parseFloat(document.getElementById('f-circ').value)||0;
-  const h=parseFloat(document.getElementById('f-h').value)||0;
-  const dbh=c>0?c/Math.PI:0;
-  document.getElementById('f-dbh').value=dbh>0?dbh.toFixed(4):'';
-  if(dbh>0&&h>0){
-    const carbon=0.0673*Math.pow(0.0673*dbh*dbh*h,0.976);
-    document.getElementById('r-d').textContent=dbh.toFixed(2);
-    document.getElementById('r-c').textContent=carbon.toFixed(4);
-    document.getElementById('r-co2').textContent=(carbon*3.67).toFixed(4);
+// ============================================================
+// CARBON CALCULATION
+// ============================================================
+function calcC() {
+  const c = parseFloat(document.getElementById('f-circ').value) || 0;
+  const h = parseFloat(document.getElementById('f-h').value) || 0;
+  const dbh = c > 0 ? c / Math.PI : 0;
+  document.getElementById('f-dbh').value = dbh > 0 ? dbh.toFixed(4) : '';
+  if (dbh > 0 && h > 0) {
+    const carbon = 0.0673 * Math.pow(0.0673 * dbh * dbh * h, 0.976);
+    document.getElementById('r-d').textContent   = dbh.toFixed(2);
+    document.getElementById('r-c').textContent   = carbon.toFixed(4);
+    document.getElementById('r-co2').textContent = (carbon * 3.67).toFixed(4);
   } else {
-    document.getElementById('r-d').textContent=dbh>0?dbh.toFixed(2):'—';
-    document.getElementById('r-c').textContent='—';
-    document.getElementById('r-co2').textContent='—';
+    document.getElementById('r-d').textContent   = dbh > 0 ? dbh.toFixed(2) : '—';
+    document.getElementById('r-c').textContent   = '—';
+    document.getElementById('r-co2').textContent = '—';
   }
 }
 
-function getGPS(){
-  const el=document.getElementById('gps-st');
-  el.textContent='กำลังระบุตำแหน่ง...';
-  if(!navigator.geolocation){el.textContent='ไม่รองรับ GPS';return;}
+// ============================================================
+// GPS
+// ============================================================
+function getGPS() {
+  const el = document.getElementById('gps-st');
+  el.textContent = 'กำลังระบุตำแหน่ง...';
+  if (!navigator.geolocation) { el.textContent = 'ไม่รองรับ GPS'; return; }
   navigator.geolocation.getCurrentPosition(
-    p=>{
-      document.getElementById('f-lat').value=p.coords.latitude.toFixed(6);
-      document.getElementById('f-lng').value=p.coords.longitude.toFixed(6);
-      el.textContent='✓ '+p.coords.latitude.toFixed(5)+', '+p.coords.longitude.toFixed(5);
+    p => {
+      document.getElementById('f-lat').value = p.coords.latitude.toFixed(6);
+      document.getElementById('f-lng').value = p.coords.longitude.toFixed(6);
+      el.textContent = '✓ ' + p.coords.latitude.toFixed(5) + ', ' + p.coords.longitude.toFixed(5);
     },
-    ()=>el.textContent='ระบุตำแหน่งไม่ได้ กรุณาอนุญาต Location',
-    {enableHighAccuracy:true,timeout:12000}
+    () => el.textContent = 'ระบุตำแหน่งไม่ได้ กรุณาอนุญาต Location',
+    { enableHighAccuracy: true, timeout: 12000 }
   );
 }
 
-function openSMModal(){
-  document.getElementById('sm-val').value='';
-  document.getElementById('sm-overlay').style.display='flex';
-  setTimeout(()=>document.getElementById('sm-val').focus(),300);
+// ============================================================
+// SMART MEASURE MODAL
+// ============================================================
+function openSM() {
+  document.getElementById('sm-val').value = '';
+  document.getElementById('sm-overlay').style.display = 'flex';
+  setTimeout(() => document.getElementById('sm-val').focus(), 300);
 }
-function closeSM(){document.getElementById('sm-overlay').style.display='none';}
-function confirmSM(){
-  const v=document.getElementById('sm-val').value;
-  if(v&&!isNaN(v)){
-    document.getElementById('f-h').value=parseFloat(v).toFixed(1);
+function closeSM(e) { document.getElementById('sm-overlay').style.display = 'none'; }
+function confirmSM() {
+  const v = document.getElementById('sm-val').value;
+  if (v && !isNaN(v)) {
+    document.getElementById('f-h').value = parseFloat(v).toFixed(1);
     calcC();
-    document.getElementById('sm-overlay').style.display='none';
-    toast('✓ บันทึกความสูง '+parseFloat(v).toFixed(1)+' เมตร');
+    document.getElementById('sm-overlay').style.display = 'none';
+    toast('✓ บันทึกความสูง ' + parseFloat(v).toFixed(1) + ' เมตร');
   } else toast('กรุณากรอกตัวเลข');
 }
 
-function takePhoto(){document.getElementById('inp-cam').value='';document.getElementById('inp-cam').click();}
-function pickGallery(){document.getElementById('inp-gal').value='';document.getElementById('inp-gal').click();}
-function pickAny(){
-  if(/android/i.test(navigator.userAgent)){
-    if(confirm('ถ่ายรูปใหม่จากกล้อง?\n(กด Cancel เพื่อเลือกจากคลัง)')){takePhoto();}
+// ============================================================
+// PHOTO
+// ============================================================
+function takePhoto()   { document.getElementById('inp-cam').value = ''; document.getElementById('inp-cam').click(); }
+function pickGallery() { document.getElementById('inp-gal').value = ''; document.getElementById('inp-gal').click(); }
+function pickAny() {
+  if (/android/i.test(navigator.userAgent)) {
+    if (confirm('ถ่ายรูปใหม่จากกล้อง?\n(กด Cancel เพื่อเลือกจากคลัง)')) takePhoto();
     else pickGallery();
-  } else { pickGallery(); }
+  } else pickGallery();
 }
-function onPhoto(inp){
-  const file=inp.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    const img=new Image();
-    img.onload=()=>{
-      const canvas=document.createElement('canvas');
-      const MAX=800;let w=img.width,h=img.height;
-      if(w>MAX){h=Math.round(h*MAX/w);w=MAX;}
-      if(h>MAX){w=Math.round(w*MAX/h);h=MAX;}
-      canvas.width=w;canvas.height=h;
-      canvas.getContext('2d').drawImage(img,0,0,w,h);
-      photoData=canvas.toDataURL('image/jpeg',0.7);
-      document.getElementById('pw').innerHTML=`<img src="${photoData}" alt="tree" onclick="pickAny()">`;
+function onPhoto(inp) {
+  const file = inp.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const MAX = 800; let w = img.width, h = img.height;
+      if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+      if (h > MAX) { w = Math.round(w * MAX / h); h = MAX; }
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      photoData = canvas.toDataURL('image/jpeg', 0.72);
+      document.getElementById('pw').innerHTML = `<img src="${photoData}" alt="tree" onclick="pickAny()">`;
     };
-    img.src=e.target.result;
+    img.src = e.target.result;
   };
   reader.readAsDataURL(file);
 }
 
-// ---- SAVE ----
-async function saveTree(){
-  const id=document.getElementById('f-id').value.trim();
-  const sp=document.getElementById('f-sp').value.trim();
-  const circ=document.getElementById('f-circ').value.trim();
-  const date=document.getElementById('f-date').value;
-  if(!id||!sp||!circ||!date){toast('กรุณากรอก: Tree ID, ชนิดพันธุ์, เส้นรอบวง, วันที่');return;}
-  const dbh=circ?parseFloat(circ)/Math.PI:0;
-  const h=parseFloat(document.getElementById('f-h').value)||0;
-  const carbon=(dbh>0&&h>0)?0.0673*Math.pow(0.0673*dbh*dbh*h,0.976):0;
-  const rec={
-    treeId:id, surveyDate:date, species:sp,
-    circumference:circ,           // ← field name ตรงกับ Apps Script
-    height:document.getElementById('f-h').value||'',
-    lat:document.getElementById('f-lat').value||'',
-    lng:document.getElementById('f-lng').value||'',
-    landType:document.getElementById('f-land').value||'',
-    healthStatus:document.getElementById('f-hlth').value||'',
-    surveyBy:document.getElementById('f-who').value||'',
-    hospital:HOSPITAL,
-    dbh:dbh.toFixed(4),
-    carbon:carbon.toFixed(4),
-    co2:(carbon*3.67).toFixed(4),
-    photo:photoData,
-    synced:false,
-    timestamp:new Date().toISOString()
-  };
-
-  // ตรวจ duplicate Tree ID
-  if(trees.find(t=>t.treeId===id)){
-    if(!confirm(`Tree ID "${id}" มีอยู่แล้ว ต้องการบันทึกซ้ำไหม?`))return;
+// ============================================================
+// SAVE TREE
+// ============================================================
+async function saveTree() {
+  const id   = document.getElementById('f-id').value.trim();
+  const sp   = document.getElementById('f-sp').value.trim();
+  const circ = document.getElementById('f-circ').value.trim();
+  const date = document.getElementById('f-date').value;
+  if (!id || !sp || !circ || !date) {
+    toast('กรุณากรอก: Tree ID, ชนิดพันธุ์, เส้นรอบวง, วันที่'); return;
   }
 
-  trees.push(rec);saveLoc();nextId++;
-  const btn=document.getElementById('save-btn');
-  btn.disabled=true;
-  document.getElementById('add-st').textContent='⏳ กำลังส่ง...';
+  const dbh    = parseFloat(circ) / Math.PI;
+  const h      = parseFloat(document.getElementById('f-h').value) || 0;
+  const carbon = (dbh > 0 && h > 0) ? 0.0673 * Math.pow(0.0673 * dbh * dbh * h, 0.976) : 0;
+
+  const rec = {
+    treeId:        id,
+    surveyDate:    date,
+    species:       sp,
+    circumference: circ,
+    dbh:           dbh.toFixed(4),
+    height:        document.getElementById('f-h').value   || '',
+    lat:           document.getElementById('f-lat').value || '',
+    lng:           document.getElementById('f-lng').value || '',
+    landType:      document.getElementById('f-land').value || '',
+    healthStatus:  document.getElementById('f-hlth').value || '',
+    surveyBy:      document.getElementById('f-who').value  || '',
+    hospital:      HOSPITAL,
+    carbon:        carbon.toFixed(4),
+    co2:           (carbon * 3.67).toFixed(4),
+    photo:         photoData,
+    synced:        false,
+    timestamp:     new Date().toISOString()
+  };
+
+  // ตรวจ duplicate
+  const dupIdx = trees.findIndex(t => t.treeId === id);
+  if (dupIdx >= 0) {
+    if (!confirm(`Tree ID "${id}" มีอยู่แล้ว — ต้องการอัปเดตข้อมูลเดิมไหม?`)) return;
+    trees[dupIdx] = { ...trees[dupIdx], ...rec }; // อัปเดตแถวเดิม
+  } else {
+    trees.push(rec);
+  }
+  saveLoc();
+  nextId = calcNextId();
+
+  const btn = document.getElementById('save-btn');
+  btn.disabled = true;
+  document.getElementById('add-st').textContent = '⏳ กำลังส่ง...';
   toast('✓ บันทึกแล้ว กำลังส่ง Sheets...');
 
-  const ok=await sendOne(rec);
-  if(ok){rec.synced=true;saveLoc();}
-  document.getElementById('add-st').textContent=ok?'✅ ส่ง Sheets แล้ว':'⚠️ บันทึกแล้ว รอส่ง Sheets';
-  btn.disabled=false;
-  toast(ok?'✅ บันทึกและส่ง Google Sheets สำเร็จ!':'✓ บันทึกแล้ว (จะส่ง Sheets ภายหลัง)');
-  setTimeout(()=>goPage('home'),1400);
+  const ok = await sendOne(rec);
+  const target = dupIdx >= 0 ? trees[dupIdx] : trees[trees.length - 1];
+  if (ok) { target.synced = true; saveLoc(); }
+  document.getElementById('add-st').textContent = ok ? '✅ ส่ง Sheets แล้ว' : '⚠️ บันทึกแล้ว รอส่ง Sheets';
+  btn.disabled = false;
+  toast(ok ? '✅ บันทึกและส่ง Google Sheets สำเร็จ!' : '✓ บันทึกแล้ว (จะส่ง Sheets ภายหลัง)');
+  setTimeout(() => goPage('home'), 1400);
 }
 
-function saveLoc(){localStorage.setItem('trees_lsk',JSON.stringify(trees));}
-
-function renderHome(){
-  const tc=trees.reduce((s,t)=>s+parseFloat(t.carbon||0),0);
-  const tco2=trees.reduce((s,t)=>s+parseFloat(t.co2||0),0);
-  document.getElementById('s-n').textContent=trees.length;
-  document.getElementById('s-c').textContent=tc.toFixed(1);
-  document.getElementById('s-co2').textContent=tco2.toFixed(1);
-  const pend=trees.filter(t=>!t.synced).length;
-  document.getElementById('sync-dot').innerHTML=
-    pend>0?`<span style="color:var(--am)">⏳ ${pend} รอส่ง</span>`:`<span style="color:var(--g)">✅ ซิงค์แล้ว</span>`;
-  const list=document.getElementById('tree-list');
-  if(!trees.length){list.innerHTML='<div class="empty"><div style="font-size:42px;margin-bottom:10px">🌿</div><p>ยังไม่มีข้อมูลต้นไม้<br>กดปุ่มด้านบนเพื่อบันทึก</p></div>';return;}
-  list.innerHTML=[...trees].reverse().map(t=>`
+// ============================================================
+// RENDER HOME
+// ============================================================
+function renderHome() {
+  const tc   = trees.reduce((s, t) => s + parseFloat(t.carbon || 0), 0);
+  const tco2 = trees.reduce((s, t) => s + parseFloat(t.co2    || 0), 0);
+  document.getElementById('s-n').textContent   = trees.length;
+  document.getElementById('s-c').textContent   = tc.toFixed(1);
+  document.getElementById('s-co2').textContent = tco2.toFixed(1);
+  const pend = trees.filter(t => !t.synced).length;
+  document.getElementById('sync-dot').innerHTML = pend > 0
+    ? `<span style="color:var(--am)">⏳ ${pend} รอส่ง</span>`
+    : `<span style="color:var(--g)">✅ ซิงค์แล้ว</span>`;
+  const list = document.getElementById('tree-list');
+  if (!trees.length) {
+    list.innerHTML = '<div class="empty"><div style="font-size:42px;margin-bottom:10px">🌿</div><p>ยังไม่มีข้อมูลต้นไม้<br>กดปุ่มด้านบนเพื่อบันทึก</p></div>';
+    return;
+  }
+  list.innerHTML = [...trees].reverse().map(t => `
     <div class="ti">
       <div class="ti-h">
         <div style="display:flex;align-items:center;gap:7px">
           <span class="pill pg">${t.treeId}</span>
           <span style="font-weight:600">${t.species}</span>
-          <span style="font-size:11px">${t.synced?'✅':'⏳'}</span>
+          <span style="font-size:11px">${t.synced ? '✅' : '⏳'}</span>
         </div>
         <span style="font-size:11px;color:var(--tx3)">${t.surveyDate}</span>
       </div>
       <div class="ti-s">
-        <div><div class="sv">${t.circumference||'—'}</div><div class="sl">เส้นรอบวง (cm)</div></div>
-        <div><div class="sv">${t.height||'—'}</div><div class="sl">ความสูง (m)</div></div>
-        <div><div class="sv" style="color:var(--g)">${parseFloat(t.carbon||0).toFixed(2)}</div><div class="sl">Carbon (kgC)</div></div>
+        <div><div class="sv">${t.circumference || t.circ || '—'}</div><div class="sl">เส้นรอบวง (cm)</div></div>
+        <div><div class="sv">${t.height || '—'}</div><div class="sl">ความสูง (m)</div></div>
+        <div><div class="sv" style="color:var(--g)">${parseFloat(t.carbon || 0).toFixed(2)}</div><div class="sl">Carbon (kgC)</div></div>
       </div>
-      ${t.photo?`<img src="${t.photo}" style="width:100%;border-radius:6px;margin-top:7px;max-height:130px;object-fit:cover">`:''}
-      ${t.lat?`<div style="font-size:11px;color:var(--tx3);margin-top:5px">📍 ${t.lat}, ${t.lng}</div>`:''}
+      ${t.photo ? `<img src="${t.photo}" style="width:100%;border-radius:6px;margin-top:7px;max-height:130px;object-fit:cover">` : ''}
+      ${t.lat   ? `<div style="font-size:11px;color:var(--tx3);margin-top:5px">📍 ${t.lat}, ${t.lng}</div>` : ''}
     </div>`).join('');
 }
 
-function renderMap(){
-  setTimeout(()=>{
-    if(!mapInst){
-      mapInst=L.map('map-view').setView([8.0,99.9],13);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:19}).addTo(mapInst);
+// ============================================================
+// RENDER MAP
+// ============================================================
+function renderMap() {
+  setTimeout(() => {
+    if (!mapInst) {
+      mapInst = L.map('map-view').setView([9.447, 100.026], 15);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        { attribution: '© OpenStreetMap', maxZoom: 19 }).addTo(mapInst);
     }
-    mapInst.eachLayer(l=>{if(l instanceof L.CircleMarker)mapInst.removeLayer(l);});
-    const withGPS=trees.filter(t=>t.lat&&t.lng);
-    if(!withGPS.length){toast('ยังไม่มีต้นไม้ที่มีพิกัด GPS');renderMapFilter();return;}
-    const bounds=[];
-    withGPS.forEach(t=>{
-      const clr=t.healthStatus==='ยอดเยี่ยม'?'#1D9E75':t.healthStatus==='ดี'?'#378ADD':t.healthStatus==='ต้องดูแล'?'#E24B4A':'#BA7517';
-      L.circleMarker([parseFloat(t.lat),parseFloat(t.lng)],{radius:10,fillColor:clr,color:'#fff',weight:2,fillOpacity:0.9})
+    mapInst.eachLayer(l => { if (l instanceof L.CircleMarker) mapInst.removeLayer(l); });
+    const gps = trees.filter(t => t.lat && t.lng);
+    if (!gps.length) { toast('ยังไม่มีต้นไม้ที่มีพิกัด GPS'); renderMapFilter(); return; }
+    const bounds = [];
+    gps.forEach(t => {
+      const clr = t.healthStatus === 'ยอดเยี่ยม' ? '#1D9E75'
+                : t.healthStatus === 'ดี'          ? '#378ADD'
+                : t.healthStatus === 'ต้องดูแล'    ? '#E24B4A' : '#BA7517';
+      L.circleMarker([parseFloat(t.lat), parseFloat(t.lng)],
+        { radius: 10, fillColor: clr, color: '#fff', weight: 2, fillOpacity: 0.9 })
         .addTo(mapInst)
-        .bindPopup(`<div style="font-family:sans-serif;min-width:140px"><b>${t.treeId} — ${t.species}</b><br>Carbon: <b>${parseFloat(t.carbon||0).toFixed(2)} kgC</b><br>สุขภาพ: ${t.healthStatus||'—'}${t.photo?`<br><img src="${t.photo}" style="width:100%;margin-top:4px;border-radius:4px">`:''}</div>`);
-      bounds.push([parseFloat(t.lat),parseFloat(t.lng)]);
+        .bindPopup(`<div style="font-family:sans-serif;min-width:140px">
+          <b>${t.treeId} — ${t.species}</b><br>
+          Carbon: <b>${parseFloat(t.carbon || 0).toFixed(2)} kgC</b><br>
+          สุขภาพ: ${t.healthStatus || '—'}
+          ${t.photo ? `<br><img src="${t.photo}" style="width:100%;margin-top:4px;border-radius:4px">` : ''}
+        </div>`);
+      bounds.push([parseFloat(t.lat), parseFloat(t.lng)]);
     });
-    if(bounds.length)mapInst.fitBounds(bounds,{padding:[30,30]});
-    setTimeout(()=>mapInst.invalidateSize(),200);
+    if (bounds.length) mapInst.fitBounds(bounds, { padding: [30, 30] });
+    setTimeout(() => mapInst.invalidateSize(), 200);
     renderMapFilter();
-  },100);
+  }, 100);
 }
-function renderMapFilter(){
-  const sp=[...new Set(trees.map(t=>t.species))];
-  document.getElementById('map-filter').innerHTML=['ทั้งหมด',...sp].map((s,i)=>`<button class="mfc ${i===0?'sel':''}" onclick="filterMap('${s}',this)">${s}</button>`).join('');
+function renderMapFilter() {
+  const sp = [...new Set(trees.map(t => t.species))];
+  document.getElementById('map-filter').innerHTML = ['ทั้งหมด', ...sp].map((s, i) =>
+    `<button class="mfc ${i === 0 ? 'sel' : ''}" onclick="filterMap('${s}',this)">${s}</button>`
+  ).join('');
 }
-function filterMap(sp,btn){
-  document.querySelectorAll('.mfc').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');
-  if(!mapInst)return;
-  mapInst.eachLayer(l=>{if(l instanceof L.CircleMarker)mapInst.removeLayer(l);});
-  (sp==='ทั้งหมด'?trees.filter(t=>t.lat&&t.lng):trees.filter(t=>t.lat&&t.lng&&t.species===sp)).forEach(t=>{
-    const clr=t.healthStatus==='ยอดเยี่ยม'?'#1D9E75':t.healthStatus==='ดี'?'#378ADD':t.healthStatus==='ต้องดูแล'?'#E24B4A':'#BA7517';
-    L.circleMarker([parseFloat(t.lat),parseFloat(t.lng)],{radius:10,fillColor:clr,color:'#fff',weight:2,fillOpacity:0.9})
-      .addTo(mapInst).bindPopup(`<b>${t.treeId} — ${t.species}</b><br>Carbon: ${parseFloat(t.carbon||0).toFixed(2)} kgC`);
+function filterMap(sp, btn) {
+  document.querySelectorAll('.mfc').forEach(b => b.classList.remove('sel'));
+  btn.classList.add('sel');
+  if (!mapInst) return;
+  mapInst.eachLayer(l => { if (l instanceof L.CircleMarker) mapInst.removeLayer(l); });
+  (sp === 'ทั้งหมด' ? trees.filter(t => t.lat && t.lng)
+                     : trees.filter(t => t.lat && t.lng && t.species === sp))
+  .forEach(t => {
+    const clr = t.healthStatus === 'ยอดเยี่ยม' ? '#1D9E75'
+              : t.healthStatus === 'ดี'          ? '#378ADD'
+              : t.healthStatus === 'ต้องดูแล'    ? '#E24B4A' : '#BA7517';
+    L.circleMarker([parseFloat(t.lat), parseFloat(t.lng)],
+      { radius: 10, fillColor: clr, color: '#fff', weight: 2, fillOpacity: 0.9 })
+      .addTo(mapInst)
+      .bindPopup(`<b>${t.treeId} — ${t.species}</b><br>Carbon: ${parseFloat(t.carbon || 0).toFixed(2)} kgC`);
   });
 }
 
-function renderDash(){
-  const tc=trees.reduce((s,t)=>s+parseFloat(t.carbon||0),0);
-  const tco2=trees.reduce((s,t)=>s+parseFloat(t.co2||0),0);
-  const byMon={};
-  trees.forEach(t=>{const m=t.surveyDate?.slice(0,7)||'ไม่ระบุ';if(!byMon[m])byMon[m]={count:0,carbon:0};byMon[m].count++;byMon[m].carbon+=parseFloat(t.carbon||0);});
-  const bySp=trees.reduce((a,t)=>{a[t.species]=(a[t.species]||0)+1;return a;},{});
-  const byH=trees.reduce((a,t)=>{if(t.healthStatus)a[t.healthStatus]=(a[t.healthStatus]||0)+1;return a;},{});
-  const maxC=Math.max(...Object.values(byMon).map(v=>v.carbon),0.001);
-  const months=Object.entries(byMon).sort((a,b)=>a[0].localeCompare(b[0]));
-  document.getElementById('dash-content').innerHTML=`
+// ============================================================
+// RENDER DASHBOARD
+// ============================================================
+function renderDash() {
+  const tc   = trees.reduce((s, t) => s + parseFloat(t.carbon || 0), 0);
+  const tco2 = trees.reduce((s, t) => s + parseFloat(t.co2    || 0), 0);
+  const byMon = {};
+  trees.forEach(t => {
+    const m = t.surveyDate?.slice(0, 7) || 'ไม่ระบุ';
+    if (!byMon[m]) byMon[m] = { count: 0, carbon: 0 };
+    byMon[m].count++;
+    byMon[m].carbon += parseFloat(t.carbon || 0);
+  });
+  const bySp = trees.reduce((a, t) => { a[t.species] = (a[t.species] || 0) + 1; return a; }, {});
+  const byH  = trees.reduce((a, t) => {
+    if (t.healthStatus) a[t.healthStatus] = (a[t.healthStatus] || 0) + 1; return a;
+  }, {});
+  const maxC   = Math.max(...Object.values(byMon).map(v => v.carbon), 0.001);
+  const months = Object.entries(byMon).sort((a, b) => a[0].localeCompare(b[0]));
+  document.getElementById('dash-content').innerHTML = `
     <div class="db2">
-      ${[['ต้นไม้ทั้งหมด',trees.length+' ต้น','var(--g)'],['Carbon รวม',tc.toFixed(2)+' kgC','var(--b)'],['CO₂ รวม',tco2.toFixed(2)+' kgCO₂','var(--am)'],['เทียบเท่า',(tco2/1000).toFixed(4)+' tCO₂','#993556']].map(([l,v,c])=>`<div class="dbc"><div class="dbl">${l}</div><div class="dbv" style="color:${c}">${v}</div></div>`).join('')}
+      ${[['ต้นไม้ทั้งหมด', trees.length + ' ต้น', 'var(--g)'],
+         ['Carbon รวม',     tc.toFixed(2) + ' kgC',   'var(--b)'],
+         ['CO₂ รวม',        tco2.toFixed(2) + ' kgCO₂', 'var(--am)'],
+         ['เทียบเท่า',      (tco2 / 1000).toFixed(4) + ' tCO₂', '#993556']]
+        .map(([l, v, c]) => `<div class="dbc"><div class="dbl">${l}</div><div class="dbv" style="color:${c}">${v}</div></div>`).join('')}
     </div>
-    ${months.length?`<div style="margin:12px 12px 4px;font-size:13px;font-weight:600">Carbon รายเดือน</div><div class="cw">${months.map(([m,v])=>`<div class="br-row"><div class="br-l">${m.slice(5)}/${m.slice(2,4)}</div><div class="br-t"><div class="br-f" style="width:${Math.max(v.carbon/maxC*100,2).toFixed(0)}%"><span class="br-v">${v.carbon.toFixed(1)}</span></div></div></div>`).join('')}</div>`:''}
+    ${months.length ? `
+      <div style="margin:12px 12px 4px;font-size:13px;font-weight:600">Carbon รายเดือน</div>
+      <div class="cw">
+        ${months.map(([m, v]) => `
+          <div class="br-row">
+            <div class="br-l">${m.slice(5)}/${m.slice(2,4)}</div>
+            <div class="br-t"><div class="br-f" style="width:${Math.max(v.carbon/maxC*100,2).toFixed(0)}%">
+              <span class="br-v">${v.carbon.toFixed(1)}</span>
+            </div></div>
+          </div>`).join('')}
+      </div>` : ''}
     <div style="margin:10px 12px 4px;font-size:13px;font-weight:600">ชนิดพันธุ์</div>
-    <div class="card" style="margin-top:0">${Object.entries(bySp).sort((a,b)=>b[1]-a[1]).map(([sp,n])=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--br)"><span>${sp}</span><span class="pill pg">${n} ต้น</span></div>`).join('')||'<p style="color:var(--tx2);font-size:13px">ยังไม่มีข้อมูล</p>'}</div>
+    <div class="card" style="margin-top:0">
+      ${Object.entries(bySp).sort((a, b) => b[1] - a[1])
+        .map(([sp, n]) => `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--br)">
+          <span>${sp}</span><span class="pill pg">${n} ต้น</span></div>`).join('')
+        || '<p style="color:var(--tx2);font-size:13px">ยังไม่มีข้อมูล</p>'}
+    </div>
     <div style="margin:10px 12px 4px;font-size:13px;font-weight:600">สถานะสุขภาพ</div>
-    <div class="card" style="margin-top:0">${Object.entries(byH).map(([h,n])=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--br)"><span>${h}</span><span class="pill pb">${n} ต้น</span></div>`).join('')||'<p style="color:var(--tx2);font-size:13px">ยังไม่มีข้อมูล</p>'}</div>`;
+    <div class="card" style="margin-top:0">
+      ${Object.entries(byH)
+        .map(([h, n]) => `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--br)">
+          <span>${h}</span><span class="pill pb">${n} ต้น</span></div>`).join('')
+        || '<p style="color:var(--tx2);font-size:13px">ยังไม่มีข้อมูล</p>'}
+    </div>`;
 }
 
-function renderExport(){
-  document.getElementById('gs-url').value=localStorage.getItem('gs_url')||'';
-  document.getElementById('ex-p').textContent=trees.filter(t=>!t.synced).length;
-  document.getElementById('ex-s').textContent=trees.filter(t=>t.synced).length;
+// ============================================================
+// RENDER EXPORT
+// ============================================================
+function renderExport() {
+  document.getElementById('gs-url').value  = localStorage.getItem('gs_url') || '';
+  document.getElementById('ex-p').textContent = trees.filter(t => !t.synced).length;
+  document.getElementById('ex-s').textContent = trees.filter(t =>  t.synced).length;
 }
 
-function dlCSV(){
-  if(!trees.length){toast('ยังไม่มีข้อมูล');return;}
-  const h='Tree ID,Survey Date,Species,Circumference,DBH (cm),Height (m),Lat,Long,Land Type,Health,Carbon(kgC),CO2(kgCO2),Survey By,Hospital,Synced\n';
-  const r=trees.map(t=>[t.treeId,t.surveyDate,t.species,t.circumference,t.dbh,t.height,t.lat,t.lng,t.landType,t.healthStatus,t.carbon,t.co2,t.surveyBy,t.hospital,t.synced?'Yes':'No'].join(',')).join('\n');
-  const blob=new Blob(['\uFEFF'+h+r],{type:'text/csv;charset=utf-8;'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');a.href=url;a.download='tree_carbon_'+new Date().toISOString().slice(0,10)+'.csv';a.click();URL.revokeObjectURL(url);
-  toast('ดาวน์โหลดสำเร็จ');
+// ============================================================
+// CSV DOWNLOAD
+// ============================================================
+function dlCSV() {
+  if (!trees.length) { toast('ยังไม่มีข้อมูล'); return; }
+  const h = 'Tree ID,Survey Date,Species,Circumference,DBH (cm),Height (m),Lat,Long,Land Type,Health,Carbon(kgC),CO2(kgCO2),Survey By,Hospital,Timestamp,Synced\n';
+  const r = trees.map(t => [
+    t.treeId, t.surveyDate, t.species,
+    t.circumference || t.circ || '',
+    t.dbh, t.height, t.lat, t.lng,
+    t.landType, t.healthStatus, t.carbon, t.co2,
+    t.surveyBy, t.hospital, t.timestamp,
+    t.synced ? 'Yes' : 'No'
+  ].map(v => `"${String(v || '').replace(/"/g, '""')}"`).join(',')).join('\n');
+  const blob = new Blob(['\uFEFF' + h + r], { type: 'text/csv;charset=utf-8;' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = 'tree_carbon_' + new Date().toISOString().slice(0, 10) + '.csv';
+  a.click(); URL.revokeObjectURL(url);
+  toast('ดาวน์โหลด CSV สำเร็จ');
 }
-function openSheets(){window.open('https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/edit','_blank');}
-function clearAll(){if(confirm('ลบข้อมูลทั้งหมด?')){trees=[];nextId=1;saveLoc();toast('ล้างข้อมูลแล้ว');renderExport();}}
 
-function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2800);}
+function openSheets() {
+  window.open('https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/edit', '_blank');
+}
+function clearAll() {
+  if (!confirm('ลบข้อมูลทั้งหมดในเครื่อง?')) return;
+  trees = []; nextId = 1; saveLoc();
+  toast('ล้างข้อมูลแล้ว');
+  renderHome();
+  renderExport();
+}
 
-// ---- INIT ----
+// ============================================================
+// TOAST
+// ============================================================
+function toast(m) {
+  const e = document.getElementById('toast');
+  e.textContent = m; e.classList.add('show');
+  setTimeout(() => e.classList.remove('show'), 2800);
+}
+
+// ============================================================
+// INIT
+// ============================================================
 renderChips('');
 renderHome();
-if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
 </script>
 </body>
 </html>
